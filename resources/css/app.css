@@ -1,0 +1,55 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+h2{
+    @apply text-4xl mb-3
+}
+
+.table2 th{
+    @apply px-6 py-4 bg-gray-700 font-medium text-gray-500 uppercase leading-10
+}
+
+.table2 tr{
+    @apply border
+}
+
+.table2 td{
+    @apply px-6 py-4 whitespace-normal
+}
+
+.form-control{
+    @apply block rounded-sm shadow-sm bg-purple-50 w-full
+}
+
+label{
+    @apply mt-2 block
+}
+
+.btn{
+    @apply border rounded px-3 py-2 text-white font-bold transition-all
+}
+
+.btn-danger{
+    @apply bg-red-600 hover:bg-red-800 border-red-600
+}
+
+.btn-primary{
+    @apply bg-blue-600 hover:bg-blue-800 border-blue-600
+}
+
+.btn-warning{
+    @apply bg-yellow-600 hover:bg-yellow-800 border-yellow-600
+}
+
+.btn-success{
+    @apply bg-green-600 hover:bg-green-800 border-green-600
+}
+
+.card{
+    @apply p-6 rounded shadow-sm
+}
+
+.card-white{
+    @apply bg-white
+}
