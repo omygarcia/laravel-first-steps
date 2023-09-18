@@ -3,7 +3,9 @@
 namespace App\Http\Requests\post;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Http\Response;
 use Illuminate\Support\Str;
+use Illuminate\Validation\ValidationException;
 use Spatie\Backtrace\File;
 
 class PutRequest extends FormRequest
@@ -14,6 +16,15 @@ class PutRequest extends FormRequest
     public function authorize(): bool
     {
         return true;
+    }
+
+    public function failedValidation(\Illuminate\Contracts\Validation\Validator $validator)
+    {
+        if($this->expectsJson())
+        {
+            $response = new Response($validator->errors(),422);
+            throw new ValidationException($validator,$response);
+        }  
     }
 
     /*

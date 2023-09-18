@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Api\CategoryController;
 use App\Http\Controllers\Dashboard\CategoryControler;
 use App\Http\Controllers\Dashboard\PostController;
 use App\Http\Controllers\ProfileController;
