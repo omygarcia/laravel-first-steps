@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Api\CategoryController;
 use App\Http\Controllers\Api\PostController;
+use App\Http\Controllers\Api\UserController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -26,10 +27,16 @@ Route::get('post/all',[PostController::class,'all'])->name('post.all');
 //segunda forma
 Route::get('post/slug/{post:slug}',[PostController::class,'slug'])->name('post.slug');
 
-Route::get('category/all',[CategoryController::class,'all'])->name('category.all');
+
 Route::get('category/slug/{slug}',[CategoryController::class,'slug'])->name('category.slug');
 Route::get('category/{category}/posts',[CategoryController::class,'posts'])->name('category.posts');
 
-Route::resource('category',CategoryController::class);
-Route::resource('post',PostController::class);
 
+Route::group(['middleware'=>'auth:sanctum'],function(){
+    Route::get('category/all',[CategoryController::class,'all'])->name('category.all');
+    Route::resource('category',CategoryController::class);
+    Route::resource('post',PostController::class);
+});
+
+
+Route::post('user/login',[UserController::class,'login']);

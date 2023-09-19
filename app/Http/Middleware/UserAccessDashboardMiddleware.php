@@ -23,7 +23,7 @@ class UserAccessDashboardMiddleware
         }
         
        
-        return redirect("/");
+        return redirect("/login");
 
         //return $next($request);
     }
