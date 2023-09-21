@@ -33,10 +33,16 @@ Route::get('category/{category}/posts',[CategoryController::class,'posts'])->nam
 
 
 Route::group(['middleware'=>'auth:sanctum'],function(){
-    Route::get('category/all',[CategoryController::class,'all'])->name('category.all');
-    Route::resource('category',CategoryController::class);
-    Route::resource('post',PostController::class);
+   
 });
 
+Route::get('category/all',[CategoryController::class,'all'])->name('category.all');
+Route::post('post/upload/{post}',[PostController::class,'upload'])->name('post.upload');
+Route::resource('category',CategoryController::class);
+Route::resource('post',PostController::class);
+
+Route::get('/vue/{n1?}/{n2?}/{n3?}',function(){
+    return view('vue');
+});
 
 Route::post('user/login',[UserController::class,'login']);
