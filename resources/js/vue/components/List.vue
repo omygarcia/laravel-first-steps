@@ -25,7 +25,7 @@
                 {{p.row.created_at}}
             </o-table-column>
             <o-table-column field="category" label="Categoria" numeric v-slot="p">
-                {{p.row.category.title}}
+                {{p.row?.category?.title}}
             </o-table-column>
             <o-table-column field="slug" label="Acciones" numeric v-slot="p">
                 <router-link class="mr-3" :to="{ name: 'save', params:{'slug':p.row.slug}}">
@@ -67,7 +67,7 @@ export default {
             posts:[],
             isLoading:true,
             //paginacion
-            rangeBefore:3,
+            rangeBefore:2,
             rangeAfter:1,
             isSimple:false,
             isRounded:true,
@@ -85,9 +85,17 @@ export default {
     },
     methods:{
         listPage(p = 1){
+
+            const config = {
+                params:{page:p},
+                /*headers:{
+                    Autorization: 'Bearer '+this.$root.token
+                }*/
+            };
+
             console.log("Click",p);
             //console.log("Click curr",this.current);
-            this.$axios.get('/laraprimerospasos/public/api/post',{params:{page:p}})
+            this.$axios.get('/laraprimerospasos/public/api/post',config)
             .then(res=>{
                 const data = res.data;
                 this.posts = data.data
@@ -117,6 +125,7 @@ export default {
         }
     },
     async mounted(){
+        console.log(this.$cookies.get('auth'));
         this.listPage();
     }
 }

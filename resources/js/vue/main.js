@@ -16,12 +16,13 @@ import App from './App.vue'
 import axios from 'axios'
 
 import router from './router'
-
+import VueCookies from 'vue3-cookies'
 
 
 const app = createApp(App)
             .use(router)
-            .use(Oruga);
+            .use(Oruga)
+            .use(VueCookies);
 
 app.config.globalProperties.$axios = axios;
 window.axios = axios;
