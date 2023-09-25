@@ -9,6 +9,7 @@ use App\Models\Category;
 use App\Models\Post;
 use Illuminate\Contracts\Session\Session;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\View\View;
 
@@ -87,7 +88,14 @@ class PostController extends Controller
      */
     public function show(Post $post)
     {
-        return view('dashboard.post.show',compact('post'));
+        if (Cache::has('post_show_'.$post->id)) {
+            return Cache::get('post_show_'.$post->id);
+        } else {
+            $cacheView = view('web.blog.show',compact('post'))->render();
+            Cache::put('post_show'.$post->id,$cacheView);
+            return $cacheView;
+        }
+        //return view('dashboard.post.show',compact('post'));
     }
 
     /**

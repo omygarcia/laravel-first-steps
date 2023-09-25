@@ -8,6 +8,7 @@ use App\Http\Requests\post\StoreRequest;
 use App\Models\Category;
 use App\Models\Post;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Storage;
 
 class PostController extends Controller
@@ -22,7 +23,23 @@ class PostController extends Controller
 
     public function all()
     {
-        return response()->json(Post::get(),200);
+        // 1 - comprobar cache
+        // 2 - Cache existe, devolver valor
+        // 3 - Cache no existe, consulta BD - cache y retornar
+
+        /*
+        if(Cache::has('post_all')){
+            return response()->json(Cache::get('post_all'));
+        }else{
+            $posts = Post::all();
+            Cache::put('post_all',$posts);
+            return response()->json($posts,200);
+        }
+        */
+
+        return Cache::remember('post_all2',now()->addMinutes(10),function(){
+            return Post::all();
+        });
     }
 
 
