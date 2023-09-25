@@ -4,7 +4,7 @@
 
 
 h1{
-    @apply text-3xl text-center
+    @apply text-3xl text-center my-3
 }
 
 :root{

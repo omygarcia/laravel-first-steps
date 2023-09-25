@@ -1,50 +1,54 @@
 <template>
-    <h1 v-if="post">Actualizar Post <span class="font-bold">{{post.title}}</span></h1>
-    <h1 v-else>Crear Post</h1>
-    <form @submit.prevent="submit">
-        <div class="grid grid-cols-2 gap-3">
-            <div class="col-span-2">
-                <o-field label="Titulo" :variant="errors.title?'danger':''" :message="errors.title?errors.title:''">
-                    <o-input v-model="form.title" value=""></o-input>
-                </o-field>
-            </div>
-            <o-field label="Descripción" :variant="errors.description?'danger':''" :message="errors.description?errors.description:''">
-                <o-input v-model="form.description" type="textarea" value=""></o-input>
-            </o-field>
-            <o-field label="Contenido" :variant="errors.content?'danger':''" :message="errors.content?errors.content:''">
-                <o-input v-model="form.content" type="textarea" value=""></o-input>
-            </o-field>
-            <o-field label="Categoria" :variant="errors.category_id?'danger':''" :message="errors.category_id?errors.category_id:''">
-                <o-select v-model="form.category_id" placeholder="Seleccione una categoria">
-                    <option v-for="c in categories" :key="c.id" :value="c.id">{{c.title}}</option>
-                </o-select>
-            </o-field>
-            <o-field label="Posted" :variant="errors.posted?'danger':''" :message="errors.posted?errors.posted:''">
-                <o-select v-model="form.posted" placeholder="Seleccione un estado">
-                    <option value="yes">Si</option>
-                    <option value="not">No</option>
-                </o-select>
-            </o-field>
+    <div class="container mx-auto">
+        <div class="mt-6 py-4 bg-white shadow-md rounded-md mb-2">
+            <h1 v-if="post">Actualizar Post <span class="font-bold">{{post.title}}</span></h1>
+            <h1 v-else>Crear Post</h1>
+            <form @submit.prevent="submit">
+                <div class="grid grid-cols-2 gap-3">
+                    <div class="col-span-2">
+                        <o-field label="Titulo" :variant="errors.title?'danger':''" :message="errors.title?errors.title:''">
+                            <o-input v-model="form.title" value=""></o-input>
+                        </o-field>
+                    </div>
+                    <o-field label="Descripción" :variant="errors.description?'danger':''" :message="errors.description?errors.description:''">
+                        <o-input v-model="form.description" type="textarea" value=""></o-input>
+                    </o-field>
+                    <o-field label="Contenido" :variant="errors.content?'danger':''" :message="errors.content?errors.content:''">
+                        <o-input v-model="form.content" type="textarea" value=""></o-input>
+                    </o-field>
+                    <o-field label="Categoria" :variant="errors.category_id?'danger':''" :message="errors.category_id?errors.category_id:''">
+                        <o-select v-model="form.category_id" placeholder="Seleccione una categoria">
+                            <option v-for="c in categories" :key="c.id" :value="c.id">{{c.title}}</option>
+                        </o-select>
+                    </o-field>
+                    <o-field label="Posted" :variant="errors.posted?'danger':''" :message="errors.posted?errors.posted:''">
+                        <o-select v-model="form.posted" placeholder="Seleccione un estado">
+                            <option value="yes">Si</option>
+                            <option value="not">No</option>
+                        </o-select>
+                    </o-field>
 
-            <o-field v-if="post" class="file">
-                <o-upload v-model="file">
-                    <o-button tag="a" variant="primary">
-                        <o-icon icon="upload"></o-icon>
-                        <span>Click para cargar</span>
-                    </o-button>
-                </o-upload>
-                <span class="file-name" v-if="file">
-                {{ file.name }}
-                </span>
-                <o-button @click="upload" icon-left="upload">
-                    Subir
-                </o-button>
-            </o-field>
+                    <o-field v-if="post" class="file">
+                        <o-upload v-model="file">
+                            <o-button tag="a" variant="primary">
+                                <o-icon icon="upload"></o-icon>
+                                <span>Click para cargar</span>
+                            </o-button>
+                        </o-upload>
+                        <span class="file-name" v-if="file">
+                            {{ file.name }}
+                        </span>
+                        <o-button @click="upload" icon-left="upload">
+                            Subir
+                        </o-button>
+                    </o-field>
+                </div>
+                <o-field horizontal><!-- Label left empty for spacing -->
+                    <o-button native-type="submit" variant="primary">Guardar</o-button>
+                </o-field>
+            </form>
         </div>
-        <o-field horizontal><!-- Label left empty for spacing -->
-            <o-button native-type="submit" variant="primary">Guardar</o-button>
-        </o-field>
-    </form>
+    </div>
 </template>
 
 <script>

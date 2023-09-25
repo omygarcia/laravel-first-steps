@@ -1,16 +1,37 @@
 <template>
     <div>
-        <header>
-            <div class="flex gap-3 bg-gray-200">
-                <router-link :to="{name:'login'}">Login</router-link>
-                <o-button variant="danger" @click="logout">
-                    Logout
-                </o-button>
-            </div>
-        </header>
-        {{$root}}
+        <nav class="bg-white border-b border-gray-100">
+            <header class="max-w-7xl px4 sm:px-6 lg:px-8">
+                <div class="flex">
+                    <div class="flex items-center">
+                        <img style="width:30px;" src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/95/Vue.js_Logo_2.svg/1200px-Vue.js_Logo_2.svg.png" alt="vue">
+                    </div>
+                    <div class="w-full flex mx-auto py-4 px-4 sm:px-6 justify-between items-center">
+                        <div class="flex h-8 items-center">
+                            <router-link class="inline-flex pt-1 uppercase border-b-2 tet-sm leading-5 px-4 py-1 
+                            text-gray-600 text-center font-bold mx-3
+                            hover:text-gray-900 hover:border-gray-700 duration-150 transition-all hover:-translate-y-1" :to="{name:'login'}">
+                                Login
+                            </router-link>
+                            <o-button variant="danger" @click="logout">
+                                Logout
+                            </o-button>
+                        </div>
+
+
+                        <div class="rounded-full w-9 h-9 bg-blue-300 text-center p-1 font-bold">
+                            AN
+                        </div>
+                        <p v-if="$root.isLoggedIn">
+                            {{$root.user.name}}
+                        </p>
+                    </div>
+                </div>
+            </header>
+        </nav>
         <!--<h1>Principal</h1>-->
         <!--<List />-->
+        
         <router-view></router-view>
     </div>
 </template>
